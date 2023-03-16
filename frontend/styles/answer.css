@@ -75,6 +75,9 @@ input[type='radio'].wrong {
     border: 6px solid #DC3333;
 }
 
+.answer-question-option.right {
+    color: #5FDC33;
+}
 
 input[type="radio"]::before {
     content: "";

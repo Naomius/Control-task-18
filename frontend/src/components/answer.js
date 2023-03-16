@@ -35,7 +35,6 @@ export class Answer {
                     console.log(this.quiz)
                     this.quizElement();
                     this.userDataStorage();
-                    this.correctAnswer();
                 }
             } catch (error) {
                 console.log(error);
@@ -60,7 +59,7 @@ export class Answer {
                                                    </div>  
                                                    
                                                    <div class="answer-question-options" id="options">                                                      
-                                                            ${this.renderAnswers(q.answers)}                                                   
+                                                            ${this.renderAnswers(q.answers)}                                                  
                                                    </div>                                         
                                             </div>`;
                     qWrapper.innerHTML += questionAnswer;
@@ -70,20 +69,18 @@ export class Answer {
 
     renderAnswers(answers) {
 
-        // const getRadio = (correct) => {
-        //     let className = '';
-        //     const radioHTML = `<input type="radio" id="${correct}" disabled ='disabled'`;
-        //     let correctAns = this.quiz.test.map(item => {
-        //         console.log(item.name)
-        //     })
-        // }
+        const getRadio = (id, correct) => {
+            let className = correct ? 'right' : correct === false ? 'wrong' : '';
+            return `<input type="radio" id="${id}" disabled ='disabled' class=${className}`;
 
-       const result = answers.map(a => {
-           const answer = `<div class="answer-question-option">
-                                <input type="radio" id="${a.id}" disabled="disabled">
-                                <label>${a.answer}</label>
+        }
+
+       const result = answers.map(({id, answer, correct}) => {
+           const answerHTML = `<div class="answer-question-option" >                          
+                                ${getRadio(id, correct)}
+                                <label>${answer}</label>
                            </div>`;
-           return answer;
+           return answerHTML;
        });
        return result.join('');
 
@@ -95,15 +92,4 @@ export class Answer {
             return  location.href = '#/result?id=' + this.routeParams.id
         }
     }
-
-    //Егор, подскажи пожалуйста, как правильно объявить и где функцию с отображением корректных ответов на вопросы,
-    // чтобы не выпадали ошибки при использовании методов. Какую-то мелочь я упускаю.. Или это функцию renderAnswers() нужно переделать на отображение.
-    correctAnswer() {
-        let correctAns = this.quiz.test.map(item => {
-                    console.log(item.name)
-                })
-    }
-
-
-
 }

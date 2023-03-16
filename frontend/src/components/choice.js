@@ -12,6 +12,7 @@ export class Choice {
         // UrlManager.checkUserData(this.routeParams);
         this.init();
 
+
     }
 
     async init() {
@@ -45,6 +46,7 @@ export class Choice {
 
         }
         this.processQuizzes();
+
     }
 
     processQuizzes() {
@@ -72,7 +74,10 @@ export class Choice {
                     choiceOptionResultElement.className = 'choice-option-result';
                     choiceOptionResultElement.innerHTML = '<div>Результат</div><div>' + result.score + '/' + result.total + '</div>';
                     choiceOptionsElement.appendChild(choiceOptionResultElement)
+
                 }
+
+
 
                 const choiceOptionImageElement = document.createElement('img');
                 choiceOptionImageElement.setAttribute('src', '/images/arrow-choice.png');
@@ -91,6 +96,13 @@ export class Choice {
         const dataId = element.getAttribute('data-id');
         if (dataId) {
             location.href = '#/test?id=' + dataId;
+        }
+    }
+
+    answerPage() {
+        const nextPageBtn = document.querySelector('.choice-option-result');
+        nextPageBtn.onclick = () => {
+            return  location.href = '#/answer?id=' + this.routeParams.id
         }
     }
 }
